@@ -5,10 +5,25 @@ export default function DecideDish() {
     const [dish1, setdish1] = useState('');
     const [dish2, setdish2] = useState('');
     const [dish3, setdish3] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [diah, setdish] = useState('');
+
    const salectDish=()=>{
-       let num=Math.random()
-       console.log()
-   }
+       let num=Math.random()*3
+       let a=Math.ceil(num)
+    //    console.log(a)
+    if(a===1){
+        setErrMsg(dish1)
+    }
+    else if(a===2){
+        setErrMsg(dish2)
+    }
+       else (setErrMsg(dish3)
+      
+
+       )}
+      
+    
     return (
         <View>
             <Text style={{ color: "#841584", textAlign: "center", fontSize: 30, fontWeight: "bold" }}>
@@ -35,6 +50,8 @@ export default function DecideDish() {
 
 
             </View>
+
+            {errMsg ? <Text style={{ color: "red", textAlign: "center", fontSize: 15, fontWeight: "bold" }}>{errMsg}</Text> : null}
 
         </View>
     )
