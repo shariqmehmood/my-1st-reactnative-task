@@ -22,6 +22,7 @@ function App() {
 
       </Stack.Navigator>
     </NavigationContainer>
+    // <DecideDish/>
   );
 }
 

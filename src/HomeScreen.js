@@ -1,32 +1,52 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, Share, View, Text, TextInput, TouchableOpacity } from "react-native";
 
 export default function DecideDish() {
     const [dish1, setdish1] = useState('');
     const [dish2, setdish2] = useState('');
     const [dish3, setdish3] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [diah, setdish] = useState('');
+    const [dish, setdish] = useState('');
 
-   const salectDish=()=>{
-       let num=Math.random()*3
-       let a=Math.ceil(num)
-    //    console.log(a)
-    if(a===1){
-        setErrMsg(dish1)
-    }
-    else if(a===2){
-        setErrMsg(dish2)
-    }
-       else (setErrMsg(dish3)
-      
+    const salectDish = () => {
+        let num = Math.random() * 3
+        let a = Math.ceil(num)
+        //    console.log(a)
+        if (a === 1) {
+            setErrMsg(dish1)
+        }
+        else if (a === 2) {
+            setErrMsg(dish2)
+        }
+        else (setErrMsg(dish3)
 
-       )}
-      
-    
+
+        )
+    }
+
+    const share= async () => {
+            try {
+              const result = await Share.share({
+                message: 'React Native | A framework for building native apps using React',
+              });
+              if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                  // shared with activity type of result.activityType
+                } else {
+                  // shared
+                }
+              } else if (result.action === Share.dismissedAction) {
+                // dismissed
+              }
+            } catch (error) {
+              alert(error.message);
+            }
+          
+    }
+
     return (
         <View>
-            <Text style={{ color: "#841584", textAlign: "center", fontSize: 30, fontWeight: "bold" }}>
+            <Text style={{ color: "#841584", textAlign: "center", fontSize: 30, fontWeight: "bold", marginTop: 30 }}>
                 Dish Selecter
             </Text>
 
@@ -42,7 +62,7 @@ export default function DecideDish() {
             <View>
                 <TouchableOpacity>
                     <View style={{ backgroundColor: "#841584", width: 230, marginLeft: "20%", marginTop: 10, height: 50, borderColor: "#841584", borderRadius: 10, }}>
-                        <Text onPress={ salectDish} style={{ color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", paddingTop: 10 }}>
+                        <Text onPress={salectDish} style={{ color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", paddingTop: 10 }}>
                             Cheak Disigion
                         </Text>
                     </View>
@@ -51,15 +71,44 @@ export default function DecideDish() {
 
             </View>
 
-            {errMsg ? <Text style={{ color: "red", textAlign: "center", fontSize: 15, fontWeight: "bold" }}>{errMsg}</Text> : null}
+
+
+
+
+
+            {errMsg ?
+                <Text style={{ fontSize: 40, textAlign: "center", marginTop: 20, }}>
+                    <View>
+                        <Text>
+                             Dish Salectd For You {'\n'}{'\n'}{'\n'}
+                        </Text>
+                    </View>
+                    <Text style={{ margin:"10px auto", fontSize: 30, color: "black" }} >
+                        {errMsg}
+                    </Text>
+                    <TouchableOpacity onPress={share}>
+                     🚀
+
+                    </TouchableOpacity>
+                </Text>
+                : null}
+
+
+
+
+
+
 
         </View>
+
+
     )
 }
 
 const styles = StyleSheet.create({
+
     input: {
-        height: 40,
+        height: 50,
         margin: 12,
         borderWidth: 1,
         borderColor: "#841584",
@@ -68,5 +117,29 @@ const styles = StyleSheet.create({
         color: "#841584",
         borderRadius: 9,
     },
+    input1: {
+        height: "auto",
+        width: "auto",
+        textAlign: "center",
+
+        marginTop: 20,
+        padding: 20,
+        color: "#841584",
+
+        fontSize: 40,
+        fontWeight: "bold",
+    },
+    input2: {
+        height: "auto",
+        width: "auto",
+        fontSize: 30,
+
+        borderWidth: 1,
+        borderColor: "#841584",
+        borderRadius: 9,
+        marginTop: "5"
+
+    },
+
 
 });
