@@ -1,48 +1,34 @@
 import React, { useState } from "react";
 import { StyleSheet, Share, View, Text, TextInput, TouchableOpacity } from "react-native";
+import ShareExample from "./share";
 
 export default function DecideDish() {
     const [dish1, setdish1] = useState('');
     const [dish2, setdish2] = useState('');
     const [dish3, setdish3] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [dish, setdish] = useState('');
-
+    
     const salectDish = () => {
         let num = Math.random() * 3
         let a = Math.ceil(num)
         //    console.log(a)
         if (a === 1) {
+           
             setErrMsg(dish1)
         }
         else if (a === 2) {
+          
             setErrMsg(dish2)
         }
-        else (setErrMsg(dish3)
+        else (
+           
+            setErrMsg(dish3)
 
 
         )
     }
 
-    const share= async () => {
-            try {
-              const result = await Share.share({
-                message: 'React Native | A framework for building native apps using React',
-              });
-              if (result.action === Share.sharedAction) {
-                if (result.activityType) {
-                  // shared with activity type of result.activityType
-                } else {
-                  // shared
-                }
-              } else if (result.action === Share.dismissedAction) {
-                // dismissed
-              }
-            } catch (error) {
-              alert(error.message);
-            }
-          
-    }
+  
 
     return (
         <View>
@@ -86,10 +72,8 @@ export default function DecideDish() {
                     <Text style={{ margin:"10px auto", fontSize: 30, color: "black" }} >
                         {errMsg}
                     </Text>
-                    <TouchableOpacity onPress={share}>
-                     🚀
-
-                    </TouchableOpacity>
+                    
+                    <ShareExample/>
                 </Text>
                 : null}
 

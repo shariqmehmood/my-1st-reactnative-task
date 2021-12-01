@@ -1,12 +1,41 @@
 import React, { useState } from 'react';
 import { StyleSheet, Image, ScrollView, TouchableOpacity, Button, TextInput, Text, View, Touchable } from 'react-native';
 import { auth, createUserWithEmailAndPassword, db,doc ,setDoc} from "../src/firebase"
-
+import * as Facebook from 'expo-facebook';
 export default function Signup({ navigation }) {
     const [name, setname] = useState("");
     const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [errMsg, setErrMsg] = useState('');
+
+    async function faceboook() {
+        try {
+          await Facebook.initializeAsync({
+            appId: '482340653104593',
+          });
+          const {
+            type,
+            token,
+            expirationDate,
+            permissions,
+            declinedPermissions,
+          } = await Facebook.logInWithReadPermissionsAsync({
+            permissions: ['public_profile'],
+          });
+          if (type === 'success') {
+            // Get the user's name using Facebook's Graph API
+            // const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+            alert("Hi Shariq") 
+            navigation.navigate('DecideDish')
+            // Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+        } else {
+            // type === 'cancel'
+        }
+    } catch ({ message }) {
+        //   alert(`Facebook Login Error: ${message}`);
+        }
+      }
+
 
     const regesterme =  async () => {
     try {
@@ -62,7 +91,7 @@ export default function Signup({ navigation }) {
             <View>
                 <TouchableOpacity>
                     <View style={{ backgroundColor: "#841584", width: 200, marginLeft: "25%", marginTop: 10, height: 50, borderColor: "#841584", borderRadius: 10 }}>
-                        <Text onPress={() => { alert("Facebook") }} style={{ color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", paddingTop: 10 }}>
+                        <Text onPress={faceboook} style={{ color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", paddingTop: 10 }}>
                             Facebook
                         </Text>
                     </View>
@@ -73,7 +102,7 @@ export default function Signup({ navigation }) {
             <View>
                 <TouchableOpacity>
                     <View style={{ backgroundColor: "#841584", width: 200, marginLeft: "25%", marginTop: 10, height: 50, borderColor: "#841584", borderRadius: 10, }}>
-                        <Text onPress={() => { alert("Facebook") }} style={{ color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", paddingTop: 10 }}>
+                        <Text onPress={() => { alert("Google no work") }} style={{ color: "black", fontSize: 30, fontWeight: "bold", textAlign: "center", paddingTop: 10 }}>
                             Google
                         </Text>
                     </View>
